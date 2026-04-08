@@ -1,3 +1,10 @@
+CREATE TABLE IF NOT EXISTS Companies(company_id SERIAL PRIMARY KEY, company_name VARCHAR UNIQUE NOT NULL, active BOOLEAN);
+CREATE TABLE IF NOT EXISTS Products(product_id SERIAL PRIMARY KEY, product_name VARCHAR UNIQUE NOT NULL,company_id INT, description VARCHAR, price FLOAT, active BOOLEAN, FOREIGN KEY (company_id) REFERENCES Companies (company_id));
+CREATE TABLE IF NOT EXISTS Warranties (warranty_id SERIAL PRIMARY KEY, warranty_months INT NOT NULL, product_id INT,FOREIGN KEY (product_id) REFERENCES Products (product_id));
+CREATE TABLE IF NOT EXISTS Categories(category_id SERIAL PRIMARY KEY, category_name VARCHAR UNIQUE NOT NULL);
+CREATE TABLE IF NOT EXISTS ProductsCategoriesXref(product_id INT NOT NULL,category_id INT NOT NULL,PRIMARY KEY (product_id, category_id), FOREIGN KEY (product_id) REFERENCES Products (product_id), FOREIGN KEY (category_id) REFERENCES Categories (category_id));
+
+
 CREATE:
 INSERT INTO Companies(company_name, active) VALUES('Company 1', True);
 INSERT INTO Categories(category_name) VALUES('Clothes');
